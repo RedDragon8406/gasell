@@ -15,15 +15,18 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from project_prgm import settings
 
-from.views import home_page
+from.views import home_page,header,footer
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', home_page),
+    path('', include('gasell_account.urls')),
+    path('header', header, name="header"),
+    path('footer', footer, name="footer"),
+    path('admin/', admin.site.urls),
 ]
 
 if settings.DEBUG:
