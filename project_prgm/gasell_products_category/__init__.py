@@ -1,0 +1,1 @@
+default_app_config = 'gasell_products_category.apps.GasellProductsCategoryConfig'
