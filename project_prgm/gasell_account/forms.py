@@ -3,6 +3,36 @@ from django.contrib.auth.models import User
 from django.core import validators
 
 
+class EditPfp(forms.Form):
+    pfp = forms.ImageField(
+        label = "عکس پروفایل :"
+    )
+
+class EditUserForm(forms.Form):
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام خود را وارد نمایید', 'class': 'form-control'}),
+        label='نام :'
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام خانوادگی خود را وارد نمایید', 'class': 'form-control'}),
+        label='نام خانوادگی :'
+    )
+
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'لطفا نام کاربری خود را وارد نمایید', 'class': 'form-control'}),
+        label='نام کاربری :'
+    )
+    email = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'لطفا ایمیل خود را وارد نمایید', 'class': 'form-control'}),
+        label='ایمیل :',
+        validators=[
+            validators.EmailValidator('ایمیل وارد شده معتبر نمیباشد')
+        ]
+    )
+
+
 class LoginForm(forms.Form):
     user_name = forms.CharField(
         widget=forms.TextInput(attrs={'placeholder': 'لطفا نام کاربری خود را وارد نمایید'}),
@@ -13,6 +43,8 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(attrs={'placeholder': 'لطفا کلمه عبور خود را وارد نمایید'}),
         label='کلمه ی عبور'
     )
+
+
 
     def clean_user_name(self):
         user_name = self.cleaned_data.get('user_name')

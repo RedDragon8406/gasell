@@ -19,12 +19,15 @@ from django.urls import path, include
 
 from project_prgm import settings
 
-from.views import home_page,header,footer
+from .views import home_page, header, footer, about_page
 
 urlpatterns = [
     path('', home_page),
+    path('about-us', about_page),
     path('', include('gasell_account.urls')),
     path('', include('gasell_products.urls')),
+    path('', include('gasell_contact.urls')),
+    path('', include('gasell_order.urls')),
     path('header', header, name="header"),
     path('footer', footer, name="footer"),
     path('admin/', admin.site.urls),

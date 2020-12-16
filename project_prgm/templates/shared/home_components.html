@@ -1,0 +1,18 @@
+<div class="item {{ forloop.first|yesno:"active," }}">
+    {% for product in group %}
+        <div class="col-sm-3">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img src="{{ product.image.url }}" alt=""/>
+                        <h2>{{ product.price }} تومان</h2>
+                        <p>{{ product.title }}</p>
+                        <a href="{{ product.get_absolute_url }}"
+                           class="btn btn-default add-to-cart">مشاهده</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

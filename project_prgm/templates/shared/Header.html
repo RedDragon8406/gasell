@@ -38,10 +38,15 @@
                 </div> -->
 
                 <div class="col-sm-4" style="text-align: left;">
-                    <div class="logo">
-                        <a href="/"><img src="{% static 'images/home/logo.png' %}" alt="Logo"
-                                                  style="text-align: center;"/></a>
+                    {% if request.user.is_authenticated %}
+                        <div class="logo">
+                        <a href="/user"><img style="border:black double 5px;width: 20%;border-radius: 50%;height: auto;margin-bottom: -10%" src="{{ user.profile.pfp.url }}" alt="Logo" style="text-align: center;"/></a>
+                        </div>
+                    {% else %}
+                        <div class="logo">
+                        <a href="/home"><img src="{{ setting.logo_image.url }}" alt="Logo" style="text-align: center;"/></a>
                     </div>
+                    {% endif %}
                 </div>
 
                 <div class="col-sm-8 header-middle-menu">
@@ -50,15 +55,15 @@
                             {% if request.user.is_superuser %}
                                     <li><a href="/admin"><i class="fa fa-user"></i> پنل ادمین</a></li>
                             {% endif %}
-                            <li><a href="#"><i class="fa fa-user"></i> حساب کاربـری</a></li>
-                            <li><a href="#"><i class="fa fa-star"></i> لیست علاقه مندی ها</a></li>
                             {% if not request.user.is_authenticated %}
                                 <li><a href="/login"><i class="fa fa-lock"></i> ورود</a></li>
                                 <li><a href="/register"><i class="fa fa-lock"></i> ثبت نام</a></li>
                             {% else %}
-                                <li><a href="/admin/logout"><i class="fa fa-lock"></i> خروج </a></li>
+                                <li><a href="/open-order"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
+                                <li><a href="#still-in-progress"><i class="fa fa-ticket"></i> تیکت های من</a></li>
+                                <li><a href="/logout"><i class="fa fa-lock"></i> خروج </a></li>
                             {% endif %}
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> سبد خریـد</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -91,8 +96,8 @@
                                     <li><a href="blog-single.html">صفحـه خبـر</a></li>
                                 </ul>
                             </li>
-                            <li><a href="About.html">درباره مـا</a></li>
-                            <li><a href="contact-us.html">تماس با مـا</a></li>
+                            <li><a href="/about-us">درباره مـا</a></li>
+                            <li><a href="/contact-us">تماس با مـا</a></li>
                         </ul>
                     </div>
                 </div>

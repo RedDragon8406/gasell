@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'gasell_account',
     'gasell_products',
     'gasell_tag',
-    'gasell_products_category'
+    'gasell_products_category',
+    'gasell_sliders',
+    'gasell_contact',
+    'gasell_settings',
+    'gasell_order'
 ]
 
 MIDDLEWARE = [

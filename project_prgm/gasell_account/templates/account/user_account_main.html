@@ -1,0 +1,39 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h2 class="title" align="center">عکس پروفایل</h2>
+                <img align="center" style="margin-right: 37.5%;border-radius: 50%;vertical-align: middle;height: 25%;width: 25%"
+                     src="{{ user.profile.pfp.url }}" alt="image could not be loaded"/>
+
+                <br><br>
+                <div class="form-group col-md-12">
+                    <div class="form-group col-md-4 col-md-offset-3" style="margin-left: 27.5%">
+                        <a  href="/user/edit/pfp">
+                            <button class="btn btn-info pull-right">تغییر عکس پروفایل</button>
+                        </a>
+                    </div>
+                </div>
+
+
+                <hr>
+                <h2 class="title" align="center">اطلاعات کاربری</h2>
+                {% if not update_profile %}
+                    <h5 style="color: #ea3939">لطفا اطلاعات کاربری خود را در بخش ویرایش اطلاعات کامل کنید :)</h5>
+                {% endif %}
+                <h4>نام کامل : {{ user.first_name }} {{ user.last_name }}</h4>
+                <h4>نام کاربری : {{ user.username }}</h4>
+                <h4>ایمیل : {{ user.email }}</h4>
+                <h4>ادمین : {% if  user.is_superuser %}
+                    بله
+                {% else %} خیر
+                {% endif %} </h4>
+            </div>
+            {% render_partial 'gasell_account.views.user_sidebar' %}
+        </div>
+    </div>
+    <br><br>
+{% endblock %}

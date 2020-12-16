@@ -16,6 +16,10 @@ def upload_image_path(instance, filename):
     final_name = f"{instance.id}-{instance.title}{ext}"
     return f"products/{final_name}"
 
+def upload_gallery_image_path(instance, filename):
+    name, ext = get_filename_ext(filename)
+    final_name = f"{instance.id}-{instance.title}{ext}"
+    return f"products/galleries/{final_name}"
 
 # Create your models here.
 
@@ -48,16 +52,32 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='قیمت')
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True, verbose_name='تصویر')
     active = models.BooleanField(default=False, verbose_name='فعال / غیرفعال')
+    exist = models.BooleanField(default=False, verbose_name='موجود / ناموجود')
     categories = models.ManyToManyField(ProductCategory, blank=True, verbose_name="دسته بندی ها")
+    visit_count = models.IntegerField(default=0, verbose_name='تعداد بازدید')
 
     objects = ProductsManager()
 
     class Meta:
         verbose_name = 'محصول'
         verbose_name_plural = 'محصولات'
+        ordering = ['title','price','active','exist']
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return f"/products/{self.id}/{self.title.replace(' ', '-')}"
+
+
+class ProductGallery(models.Model):
+    title = models.CharField(max_length=150, verbose_name='عنوان')
+    image = models.ImageField(upload_to=upload_gallery_image_path, verbose_name='تصویر')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='محصول')
+
+    class Meta:
+        verbose_name = 'تصویر'
+        verbose_name_plural = 'تصاویر'
+
+    def __str__(self):
+        return self.title
